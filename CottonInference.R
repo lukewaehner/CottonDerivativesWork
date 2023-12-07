@@ -1,8 +1,8 @@
-data <- read.csv("~/Desktop/Cotton Stuff/cotton-prices-historical-chart-data.csv")
+data <- read.csv("~/Desktop/CottonDerivativesWork/cotton-prices-historical-chart-data.csv")
 library(ggplot2)
 library(dplyr)
 data$date <- as.Date(data$date, format = "%Y-%m-%d")
-hanesred <- rgba(255,0,0,255)
+
 #separate data
 cull_data <- as.Date("2018-01-01")
 ndata <- data %>% filter(date >= cull_data)
@@ -11,6 +11,10 @@ data2019 <- tail(head(ndata, 508),256)
 data2020 <- tail(head(ndata, 766), 258)
 data2021 <- tail(head(ndata, 1026), 260)
 data2022 <- head(tail(ndata, 470), 259)
+
+returnFrame <- rbind(data2018, data2019, data2020, data2021, data2022)
+save(returnFrame, file="~/Desktop/CottonFiveYearFrame.rda")
+
 
 returns2022 <- diff(data2022$value)/ lag(data2022$value, default = first(data2022$value))
 daily_volatility2022 <- sd(returns2022)
@@ -38,8 +42,7 @@ average_price <- c(mean(data2018$value),mean(data2019$value),mean(data2020$value
 price_deviation <- c(annual_volatility2018, annual_volatility2019, annual_volatility2020, 
          + annual_volatility2021, annual_volatility2022)
 fiveyearframe <- data.frame(years, average_price, price_deviation)
-print(fiveyearframe)
-data
+
 plot <- ggplot(data, aes(x = date, y = value, group=1)) +
   geom_line() +
   labs(title = "Cotton Price Over Time",
@@ -63,3 +66,4 @@ CTmean <- y1
 CTsd <- mean(fiveyearframe$price_deviation)
 
 #rank normal, quasi-normal 
+
