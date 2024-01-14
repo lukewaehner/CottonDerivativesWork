@@ -1,9 +1,9 @@
-data <- read.csv("~/Desktop/CottonDerivativesWork/cotton-prices-historical-chart-data.csv")
+data <- read.csv("~/Desktop/CottonDerivativesWork/DataSets/cotton-prices-historical-chart-data.csv")
 library(ggplot2)
 library(dplyr)
 data$date <- as.Date(data$date, format = "%Y-%m-%d")
 
-#separate data
+#separate data into years
 cull_data <- as.Date("2018-01-01")
 ndata <- data %>% filter(date >= cull_data)
 data2018 <- head(ndata, 252)
@@ -13,9 +13,9 @@ data2021 <- tail(head(ndata, 1026), 260)
 data2022 <- head(tail(ndata, 470), 259)
 
 returnFrame <- rbind(data2018, data2019, data2020, data2021, data2022)
-save(returnFrame, file="~/Desktop/CottonFiveYearFrame.rda")
+save(returnFrame, file="~/Desktop/CottonDerivativesWork/CottonFiveYearFrame.rda")
 
-
+#calculating annual volatility for each year (final line only important var)
 returns2022 <- diff(data2022$value)/ lag(data2022$value, default = first(data2022$value))
 daily_volatility2022 <- sd(returns2022)
 annual_volatility2022 <- daily_volatility2022 * sqrt(252)
@@ -36,6 +36,7 @@ returns2018 <- diff(data2018$value)/ lag(data2018$value, default = first(data201
 daily_volatility2018 <- sd(returns2018)
 annual_volatility2018 <- daily_volatility2018 * sqrt(252)
 
+
 years <- c(2018,2019,2020,2021,2022)
 average_price <- c(mean(data2018$value),mean(data2019$value),mean(data2020$value), 
            + mean(data2021$value), mean(data2022$value))
@@ -54,9 +55,9 @@ y2 <- (mean(fiveyearframe$average_price)-mean(fiveyearframe$price_deviation))
 y3 <- (mean(fiveyearframe$average_price)+mean(fiveyearframe$price_deviation))
 y4 <- (mean(fiveyearframe$price_deviation))
 print(y1) #mean
-print(y2) #lower bound
-print(y3) #upper bound
-print(y4)
+print(y2) #lower bound (mean price - 1sd)
+print(y3) #upper bound (mean price + 1sd)
+print(y4) #Standard Deviation of Price
 y_values <- c(y1,y2,y3) #vector
 plot + geom_hline(yintercept = y_values, linetype="dashed", color = "red") + 
   scale_x_date(date_labels = "%Y", date_breaks = "5 year")

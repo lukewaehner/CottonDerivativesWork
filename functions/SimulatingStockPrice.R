@@ -1,4 +1,4 @@
-data <- read.csv("~/Desktop/CottonDerivativesWork/cotton-prices-historical-chart-data.csv")
+data <- read.csv("~/Desktop/CottonDerivativesWork/Datasets/cotton-prices-historical-chart-data.csv")
 library(ggplot2)
 library(dplyr)
 data$date <- as.Date(data$date, format = "%Y-%m-%d")
@@ -13,7 +13,7 @@ data2021 <- tail(head(ndata, 1026), 260)
 data2022 <- head(tail(ndata, 470), 259)
 
 returnFrame <- rbind(data2018, data2019, data2020, data2021, data2022)
-save(returnFrame, file="~/Desktop/CottonFiveYearFrame.rda")
+save(returnFrame, file="~/Desktop/CottonDerivativesWork/CottonFiveYearFrame.rda")
 
 
 simulate_stock_prices <- function(initial_price, drift, volatility, time_period, num_simulations) {
@@ -63,7 +63,7 @@ threshold_value1 <- 1.4
 #drift and vol calcs
 daily_returns <- diff(returnFrame$value) / lag(returnFrame$value, default = returnFrame$value[1])
 
-# Func Parameters
+# <----------- Func Parameters -------------->
 initial_price <- returnFrame$value[length(returnFrame$value)-1]  
 drift <- mean(daily_returns)
 volatility <- sd(daily_returns)
