@@ -6,9 +6,9 @@ from datetime import datetime
 
 # Read the data from the file
 cotton = pd.read_csv(
-    '~/Desktop/CottonDerivativesWork/cotton-prices-historical-chart-data.csv')
+    '../../data/raw/cotton-prices-historical-chart-data.csv')
 
-rsiData = pd.read_csv('~/Desktop/CottonDerivativesWork/Annual_Cotton_CSV.csv')
+rsiData = pd.read_csv('../../data/raw/Annual_Cotton_CSV.csv')
 # strip dollar signs and percentage symbols from columns
 rsiData['Average Closing Price'] = rsiData['Average Closing Price'].str.replace(
     '$', '').astype(float)

@@ -1,0 +1,29 @@
+# R
+.RData
+.Rhistory
+.Rapp.history
+*.Rproj
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Data (uncomment if you don't want to track large data files)
+# data/raw/*.csv
+# data/processed/*.rda
