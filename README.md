@@ -6,7 +6,7 @@ A comprehensive analysis of cotton price derivatives using advanced statistical 
 
 This project provides a complete framework for analyzing cotton price derivatives using:
 
-- ** Geometric Brownian Motion (GBM) simulation** with 1000+ Monte Carlo runs
+- **Geometric Brownian Motion (GBM) simulation** with 1000+ Monte Carlo runs
 - **Advanced statistical analysis** with comprehensive validation testing
 - **Professional interactive visualizations** and dashboards
 - **Multiple scenario analysis** (standard, conservative, aggressive)
@@ -92,7 +92,6 @@ CottonDerivativesWork/
 - **Modular Architecture**: Separated concerns with reusable components
 - **Comprehensive Testing**: 100% test coverage with validation suite
 - **Error Handling**: Robust input validation and graceful error management
-- **Documentation**: Professional Roxygen-style function documentation
 - **Reproducibility**: Seeded random number generation for consistent results
 
 ## **Quick Start**
